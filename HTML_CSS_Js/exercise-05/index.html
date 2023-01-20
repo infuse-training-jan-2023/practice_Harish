@@ -1,0 +1,39 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="index.js"></script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+                <div >
+                        <h1 > Pokemon</h1>
+                        <span>Sort</span>
+                        <select id="sort">
+                            <option value=""></option>
+                            <option value=1>default</option>
+                            <option value=2>weights</option>
+                            <option value=3>Experience</option>
+                        </select>
+                        <input id="searchbar" type="text"  placeholder="Search.." name="search">
+                </div>
+        <div id="flow">     
+        <div id="container">
+            <div id="poke-container" class="cards">
+            </div>
+        </div>
+        <div id="frame-container" style=" height:90%;">
+        <frameset>
+            <iframe name="viewDetails">
+
+            </iframe>
+        </frameset>
+
+        </div></div>
+            <div>
+                <button id="Load-btn" style="position:relative;">Load More</button>
+            </div>
+    </body>
+    </html>
