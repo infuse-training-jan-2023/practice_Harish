@@ -15,7 +15,7 @@ print("3.Multiply")
 
 
 while True:
-    choice = input("Enter choice(1/2): ")
+    choice = input("Enter choice(1/2/3): ")
 
     if choice in ('1', '2','3'):
         try:
