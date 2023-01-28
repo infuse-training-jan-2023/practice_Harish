@@ -1,5 +1,5 @@
 require 'selenium-webdriver'
-class GetPageTitle
+class PageTitle
     attr_accessor :driver, :wait
 
     def initialize(driver_path)
@@ -21,7 +21,7 @@ end
 
 driver_path = "C:\\Users\\haris\\OneDrive\\Documents\\Selenium\\chromedriver_win32\\chromedriver.exe"
 url = "https://www.selenium.dev/"
-ex2=GetPageTitle.new(driver_path)
-ex2.open_browser(url)
-ex2.get_page_title()
-ex2.close_browser()
+example2_obj=PageTitle.new(driver_path)
+example2_obj.open_browser(url)
+example2_obj.get_page_title()
+example2_obj.close_browser()

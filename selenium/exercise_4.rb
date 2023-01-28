@@ -1,5 +1,5 @@
 require 'selenium-webdriver'
-class ClickElelemt
+class Exercise4
     attr_accessor :driver, :wait
 
     def initialize(driver_path)
@@ -10,11 +10,22 @@ class ClickElelemt
         driver.get(url)
     end
     def click_check_box
-       driver.find_element(:id ,"checkbox2").click
+        begin
+        driver.find_element(:id ,"checkbox2").click
+        rescue => exception
+            puts exception.message
+        end
+    
     end
     def click_radio_button
-           driver.find_element(:css,"label > input.ng-pristine.ng-untouched.ng-invalid.ng-invalid-required
-                ").click
+        begin
+           radio_option=driver.find_elements(:name,"radiooptions")
+           radio_option[0].click
+        rescue => exception
+            puts exception.message
+        end
+
+
     end
     def close_browser()
         driver.close()
@@ -23,8 +34,8 @@ end
 
 driver_path="C:\\Users\\haris\\OneDrive\\Documents\\Selenium\\chromedriver_win32\\chromedriver.exe"
 url = "https://demo.automationtesting.in/Register.html"
-ex4=ClickElelemt.new(driver_path)
-ex4.open_browser(url)
-ex4.click_radio_button()
-ex4.click_check_box()
-ex4.close_browser()
+example4_obj=Exercise4.new(driver_path)
+example4_obj.open_browser(url)
+example4_obj.click_radio_button()
+example4_obj.click_check_box()
+example4_obj.close_browser()

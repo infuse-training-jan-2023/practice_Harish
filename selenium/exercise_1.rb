@@ -4,12 +4,11 @@ class Maximize_browser
 
     def initialize(driver_path)
         Selenium::WebDriver::Chrome.driver_path=driver_path
-        @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
         @driver=Selenium::WebDriver.for :chrome
     end
     def maximize_browser(url)
         driver.get(url)
-        wait.until{driver.manage.window.maximize}
+        driver.manage.window.maximize
     end
     def close_browser()
         driver.close()

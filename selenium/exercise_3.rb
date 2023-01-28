@@ -1,10 +1,9 @@
 require 'selenium-webdriver'
-class ClickElelemt
+class Exercise3
     attr_accessor :driver, :wait
 
     def initialize(driver_path)
         Selenium::WebDriver::Chrome.driver_path=driver_path
-        @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
         @driver=Selenium::WebDriver.for :chrome
     end
     def open_browser(url)
@@ -25,7 +24,7 @@ end
 
 driver_path="C:\\Users\\haris\\OneDrive\\Documents\\Selenium\\chromedriver_win32\\chromedriver.exe"
 url = "https://www.selenium.dev/"
-ex3=ClickElelemt.new(driver_path)
-ex3.open_browser(url)
-ex3.click_button()
-ex3.close_browser()
+example3_obj=Exercise3.new(driver_path)
+example3_obj.open_browser(url)
+example3_obj.click_button()
+example3_obj.close_browser()

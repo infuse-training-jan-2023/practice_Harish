@@ -1,5 +1,5 @@
 require 'selenium-webdriver'
-class ClickElelemt
+class Exercise5
     attr_accessor :driver, :wait
 
     def initialize(driver_path)
@@ -12,8 +12,9 @@ class ClickElelemt
         driver.get(url)
     end
     def search_information
-        driver.find_element(:name ,"q").send_keys 'selenium-webdrivers'
-        driver.find_element(:css,"div[class='FPdoLc lJ9FBc'] input[value='Google Search']").click
+        search_bar=driver.find_element(:class ,"gLFyf")
+        search_bar.send_keys 'selenium-webdrivers'
+        search_bar.send_keys(:return)
     end
 
     def close_browser()
@@ -23,7 +24,7 @@ end
 
 driver_path="C:\\Users\\haris\\OneDrive\\Documents\\Selenium\\chromedriver_win32\\chromedriver.exe"
 url = "https://www.google.com/"
-ex5=ClickElelemt.new(driver_path)
-ex5.open_browser(url)
-ex5.search_information()
-ex5.close_browser()
+example5_obj=Exercise5.new(driver_path)
+example5_obj.open_browser(url)
+example5_obj.search_information()
+example5_obj.close_browser()
