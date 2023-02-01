@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('create file') {
+            steps {
+                bat ''' 
+                MKDIR  "./jenkins"
+                echo "welcome to jenkins" > "./jenkins/welcome.txt" 
+                '''
+            }
+        }
+    }
+}

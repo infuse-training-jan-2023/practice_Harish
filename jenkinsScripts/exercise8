@@ -1,0 +1,29 @@
+import groovy.json.JsonSlurperClassic
+
+pipeline {
+    agent any
+
+    stages {
+        stage("fetchdata") {
+            steps {
+                script {
+                    try{
+                        def postmanGet  = new URL('https://jsonplaceholder.typicode.com/todos')
+                        def getConnection =postmanGet.openConnection()
+                        getConnection.requestMethod ='GET'
+                        assert getConnection.responseCode ==200
+                        def resp =getConnection.getInputStream().getText()
+                        println (resp)
+                        def jsonSlurper = new JsonSlurperClassic()
+                        def data = jsonSlurper.parseText(resp)
+                        data.each{if(it.completed == false)println it}
+                        }
+                    catch(err)
+                        {
+                            echo "Failed: ${err}"
+                        }
+                    }
+                }
+            }
+        }
+    }
