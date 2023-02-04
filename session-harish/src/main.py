@@ -21,9 +21,9 @@ def get_items(id):
 @app.route('/item', methods = ['POST'])
 def add_new_item():
     request_data = request.get_json()
-    # item = request_data['item']
-    # reminder = request_data['reminder']
-    added_item = item_actions.add_item(item, request_data)
+    item = request_data['item']
+    reminder = request_data['reminder']
+    added_item = item_actions.add_item(item, reminder)
     if added_item == {}:
         return Response("{'error': 'Erro addding the item'}", mimetype='application/json', status=500)
     return Response(json.dumps(added_item), mimetype='application/json', status=201)
@@ -52,12 +52,12 @@ def adduser():
     added_user = item_actions.add_user(ursername, email, phone)
     if added_user == {}:
         return Response("{'error': 'Erro addding the item'}", mimetype='application/json', status=500)
-    return Response(json.dumps(added_user), mimetype='application/json', status=201)
+    return Response('{"message":"user added successfully"}', mimetype='application/json', status=201)
 
 @app.route('/save' , methods=["GET"])
 def save_data():
     item_actions.save_data()
-    return {"status":"data saved"}
+    return Response('{"status":"data saved successfully"}',mimetype='application/json', status=200)
     #send_file('../out.csv')
 
 if __name__ == '__main__':
