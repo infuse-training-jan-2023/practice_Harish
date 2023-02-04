@@ -33,9 +33,14 @@ nav li{
   padding: 10px;
   color: #00f3ff;
 }
+nav li:hover{
+  background-color: rgb(148, 163, 164);
+  cursor: pointer;
+}
 li span{
   text-transform: capitalize;
 }
+
 .um-logo {
   padding: 16px 24px;
   border-bottom: 1px solid rgb(205, 205, 205);
@@ -76,6 +81,7 @@ li span{
 
 form {
 	display: flex;
+  height: auto;
 }
 div label{
   vertical-align: top;
@@ -87,7 +93,7 @@ div label{
 }
 
 .test-designer {
-	height: 460px;
+	height: 470px;
 }
 
 .test-main {
@@ -102,11 +108,11 @@ div label{
 }
 .test-flowchart{
   flex-grow: 2;
-grid-column: 1/ span 2;
 margin-right:0;
 }
 .test-data{
-  display: block;}
+  display: block;
+}
 
 .test-flowchart>span{
   display: block;
@@ -114,7 +120,7 @@ background-color: rgb(20, 149, 235)
 }
 .test-properties{
   grid-column: 1 /5;
-  height: 177px
+  height: 70%
 }
 .test-properties>span{
   display: block;
@@ -130,6 +136,7 @@ background-color: rgb(20, 149, 235)
 
 .test-variables, .test-parameters {
 	border: 1px solid black;
+  height: 100%;
   border-left: 10px solid gray;
 	flex-grow: 1;
 }

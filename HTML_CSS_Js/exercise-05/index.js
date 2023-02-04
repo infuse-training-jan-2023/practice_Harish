@@ -1,4 +1,4 @@
-pokemonArray =[]
+let pokemonArray =[]
 let offset=0
 function fetchData(){
     console.log(offset)
@@ -24,37 +24,38 @@ function fetchData(){
 
 
 function displayPokemon(pokeData){
-        let allPokemonContainer = document.getElementById('poke-container');
-        let pokeContainer = document.createElement("div") 
-        let pokeName = document.createElement('h4')
+        let pokemonContainer = document.getElementById('poke-container');
+        let pokemonCard = document.createElement("div") 
+        let pokemonName = document.createElement('h4')
         let pokemonWeight = document.createElement('div')
-        pokemonWeight.classList.add('weight');
-
         let pokemonBaseExperience = document.createElement('div')
         pokemonBaseExperience.classList.add('baseExperience');
+        pokemonWeight.classList.add('weight');
 
-        let pokeId=document.createElement('span');
-        var viewMoreLink = document.createElement('a'); 
-        var link = document.createTextNode("View More");
+        let pokemonId=document.createElement('span');
+        let viewMoreLink = document.createElement('a'); 
+        let link = document.createTextNode("View More");
+
         viewMoreLink.title = "View More"; 
         viewMoreLink.target="viewDetails"
         viewMoreLink.href = `frame.html?id=${pokeData.id}`; 
         viewMoreLink.append(link)
-        pokeContainer.classList.add('ui', 'card');
-        pokeContainer.id=pokeData.id;
-        console.log(pokeData.id)
-        createPokeImage(pokeData, pokeContainer);
-        pokeName.classList.add("name")
-        pokeId.innerText=pokeData.id
-        pokeName.innerText = pokeData.name
+        pokemonCard.classList.add('ui', 'card');
+        pokemonCard.id=pokeData.id;
+
+        createPokeImage(pokeData, pokemonCard);
+        
+        pokemonName.classList.add("name")
+        pokemonId.innerText=pokeData.id
+        pokemonName.innerText = pokeData.name
         pokemonWeight.innerText = `${pokeData.weight}`
         pokemonBaseExperience.innerText=`${pokeData.base_experience}`
-        pokeContainer.append(pokeId,pokeName, pokemonWeight, pokemonBaseExperience,viewMoreLink);  
-        allPokemonContainer.appendChild(pokeContainer);    
+        pokemonCard.append(pokemonId,pokemonName, pokemonWeight, pokemonBaseExperience,viewMoreLink);  
+        pokemonContainer.appendChild(pokemonCard);    
 }
 
 
-function filter() {
+function filterCards() {
     let input = document.querySelector('#searchbar').value
     input = input.toLowerCase();
     let cards = document.querySelectorAll('.card');                     
@@ -70,13 +71,21 @@ function createPokeImage(pokeData, containerDiv){
 
     let pokeImage = document.createElement('img')
     pokeImage.src = `${pokeData.sprites.front_default}`
-
+    pokeImage.alt = "Loading..."
+    pokeImage.addEventListener("mouseover",()=>
+    {
+        pokeImage.src = `${pokeData.sprites.back_default}`
+    })
+    pokeImage.addEventListener("mouseout",()=>
+    {
+        pokeImage.src = `${pokeData.sprites.front_default}`
+    })
     pokeImgContainer.append(pokeImage);
     containerDiv.append(pokeImgContainer);
 }
 
-function sort(){
-    var sortSelection = document.getElementById("sort");
+function sortCards(){
+    let sortSelection = document.getElementById("sort");
     let sortedElements = [...document.querySelectorAll('.card')]
     console.log(sortedElements[0].childNodes[1].innerText)    
     if (sortSelection.value == 1){
@@ -92,7 +101,7 @@ function sort(){
         document.getElementById("poke-container").append(...sortedElements);
     }
 }
-function loadmore(){
+function loadData(){
     offset+=20
     fetchData()
 }
@@ -101,11 +110,11 @@ document.addEventListener("DOMContentLoaded", () =>{
     sort_select=document.getElementById("sort")
     search=document.getElementById("searchbar")
     PokeImg=document.getElementsByClassName("Poke-image")
-    sort_select.addEventListener("change",sort)
-    search.addEventListener("keyup",filter) 
+    sort_select.addEventListener("change",sortCards)
+    search.addEventListener("keyup",filterCards) 
     
     load_btn=document.getElementById("Load-btn")
-    load_btn.addEventListener("click",loadmore)
+    load_btn.addEventListener("click",loadData)
     
 })
 

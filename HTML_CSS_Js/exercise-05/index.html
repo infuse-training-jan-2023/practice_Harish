@@ -6,32 +6,28 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="index.js"></script>
         <link rel="stylesheet" href="index.css">
+        <title>Pokedex</title>
     </head>
     <body>
-                <div >
-                        <h1 > Pokemon</h1>
-                        <span>Sort</span>
-                        <select id="sort">
-                            <option value=""></option>
-                            <option value=1>default</option>
-                            <option value=2>weights</option>
-                            <option value=3>Experience</option>
-                        </select>
-                        <input id="searchbar" type="text"  placeholder="Search.." name="search">
-                </div>
+        <div class="navigation">
+                <h1 > Pokemon</h1>
+                <span>Sort Cards</span>
+                <select id="sort">
+                    <option value=""></option>
+                    <option value=1>default</option>
+                    <option value=2>weights</option>
+                    <option value=3>Experience</option>
+                </select>
+                <input id="searchbar" type="search"  placeholder="Search.." name="search">
+        </div>
         <div id="flow">     
-        <div id="container">
-            <div id="poke-container" class="cards">
+            <div id="container">
+                <div id="poke-container" class=""></div>
+            </div>
+            <div id="frame-container" style=" height:90%;">
+                <iframe name="viewDetails"></iframe>
             </div>
         </div>
-        <div id="frame-container" style=" height:90%;">
-        <frameset>
-            <iframe name="viewDetails">
-
-            </iframe>
-        </frameset>
-
-        </div></div>
             <div>
                 <button id="Load-btn" style="position:relative;">Load More</button>
             </div>

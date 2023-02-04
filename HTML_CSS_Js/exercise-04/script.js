@@ -11,7 +11,19 @@ const user = {
 
 const printUserProfile = ({name, designation, company,hobbies}=user) => {
     // Piyush Sharma is a Senior Software Engineer at Infuse Consulting. He likes Reading, Listening to music and Collecting stamps
-    console.log(name+"is a "+designation+" at "+ company+".He Like "+hobbies[0]+", "+hobbies[1]+" and "+hobbies[2] );
+    message=name+"is a"+designation+" at "+company+". He likes "
+    hobbies.map((hobbie,idx) =>
+    {   if (idx ==hobbies.length-2){
+            message+=hobbie+" and "
+        }
+        if (idx == hobbies.length -1 ){
+            message+=hobbie
+            
+        }
+        else
+            message+=hobbie+","
+    })
+    console.log(message);
 }
 
 printUserProfile()

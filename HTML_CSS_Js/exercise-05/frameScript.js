@@ -25,22 +25,46 @@ let pokeMoves=document.getElementById('moves')
 let pokeImage=document.getElementById('sprite')
 console.log(Data[0])
 pokeImage.src=`${Data[0].sprites.front_default}`
+pokeImage.alt="image loading ..."
 pokeName.innerText=Data[0].name;
 pokeWeight.innerText=Data[0].weight;
 pokeExperience.innerText=Data[0].base_experience
 pokeForms.innerText=Data[0].forms[0].name
 pokeSpecies.innerText=Data[0].species.name
-let moves=Data[0].moves.slice(0,5)
+//let moves=Data[0].moves.slice(0,5)
 let stats=Data[0].stats
 stats.map((s)=>{pokeStats.innerText+=` ${(s.stat.name)}, `})
-moves.map((moves)=>{pokeMoves.innerText+=` ${(moves.move.name)}, `})
+//moves.map((moves)=>{pokeMoves.innerText+=` ${(moves.move.name)}, `})
+
+//let movess=Data[0].moves.slice(5,)
+//let pokeMovess=document.getElementById('more-moves')
+//movess.map((moves)=>{pokeMovess.innerText+=` ${(moves.move.name)}, `})
+//pokeMovess.style.display="none"
+let moves=Data[0].moves
+let pokeMovess=document.getElementById('more-moves')
+pokeMovess.style.display="none"
+moves.map((moves,idx)=>{
+     if(idx<5)
+        pokeMoves.innerText+=`${(moves.move.name)}`
+    else 
+        pokeMovess.innerText+=` ${(moves.move.name)}`
+})
+
 }
 function loadMoves(btn)
 { 
-btn.style.display='none';
-let moves=Data[0].moves.slice(5,)
-let pokeMoves=document.getElementById('moves')
-moves.map((moves)=>{pokeMoves.innerText+=` ${(moves.move.name)}, `})
+//btn.style.display='none';
+let pokeMovess=document.getElementById('more-moves')
+if(btn.innerHTML === 'view more')
+{   
+    btn.innerHTML='view less'
+    pokeMovess.style.display="inline"
+}
+else
+{
+    btn.innerHTML='view more'
+    pokeMovess.style.display="none"
+}
 }
 
 function createPokeImage(pokeData, containerDiv){
