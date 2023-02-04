@@ -1,14 +1,15 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('create file') {
+pipeline
+    {
+        agent {
+            label "jenkins-slave-harish"
+              }
+        stages {
+        stage('run script') 
+        {
             steps {
-                bat ''' 
-                MKDIR  "./jenkins"
-                echo "welcome to jenkins" > "./jenkins/welcome.txt" 
-                '''
+                bat 'C:/Users/haris/OneDrive/Desktop/jenkins/script.bat'
             }
         }
     }
 }
+
