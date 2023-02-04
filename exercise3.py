@@ -12,7 +12,3 @@ class Exercise3:
 
 exercise3_obj = Exercise3() 
 final_list=exercise3_obj.skip_sports(['cricket','TT','Football','Hockey'],2)
-
-#optimize at i if i is greater
-#optimize at sum of i
-#if j
