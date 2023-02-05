@@ -18,7 +18,6 @@ class FrameworkTest < Test::Unit::TestCase
         webdriver_obj =Webdriver.new()
         driver=webdriver_obj.instance_variable_get(:@driver)
         framework_obj = Framework.new(driver)
-        framework_obj = Framework.new(webdriver_obj.instance_variable_get(:@driver))
         assert_equal("This is dummy page",framework_obj.navigate_to_page(@@url))
     end
     def test_click_element_valid_case()
@@ -30,6 +29,7 @@ class FrameworkTest < Test::Unit::TestCase
         btn_inner_text=driver.find_element({xpath: "//*[@id=\"test-btn\"]"}).text
         assert_equal("Button Clicked",btn_inner_text)
     end
+
     def test_for_send_text()
         webdriver_obj =Webdriver.new()
         driver=webdriver_obj.instance_variable_get(:@driver)
@@ -97,5 +97,15 @@ class FrameworkTest < Test::Unit::TestCase
         driver.get(@@url)
         output = framework_obj.find_element({css: "h1"})
         assert_not_equal(nil,output)
+    end
+
+    def test_get_text_of_input_element
+        webdriver_obj = Webdriver.new()
+        driver = webdriver_obj.instance_variable_get(:@driver)
+        framework_obj = Framework.new(driver)
+        driver.get(@@url)
+        driver.find_element({xpath: "//*[@id=\"email\"]"}).send_keys("test@mail.com")
+        text=framework_obj.get_text({xpath: "//*[@id=\"email\"]"})
+        assert_equal("test@mail.com",text)
     end
 end

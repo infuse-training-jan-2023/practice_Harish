@@ -45,7 +45,12 @@ class Framework
     def get_text(locator)
         begin
             selected=find_element(locator)
-            return selected.text
+            if selected.text.empty?
+                text=selected.attribute("value")
+            else
+                text=selected.text    
+            end
+            return text
         rescue => exception
             puts exception.message
         end
