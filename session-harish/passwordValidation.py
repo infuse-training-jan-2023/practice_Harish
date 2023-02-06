@@ -7,6 +7,9 @@ app = Flask(__name__)
 def get_data():
     request_data = request.get_json()
     password = request_data['password']
+    validate_password(password)
+    
+def validate_password(password):
     validPasswordPattern ="(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}"
     if re.match(validPasswordPattern,password):
         return Response("{'status': 'valid password'}", mimetype='application/json', status=200)

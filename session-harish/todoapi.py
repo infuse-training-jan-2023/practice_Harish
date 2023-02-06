@@ -6,6 +6,9 @@ app = Flask(__name__)
 
 @app.route('/todo/<int:num>',methods =['GET'])
 def get_data(num):
+    return get_todo(num)
+
+def get_todo(num):
     if isinstance(num, int) and num in range(1,200):
         url = "https://jsonplaceholder.typicode.com/todos/{}".format(num)
         res = requests.get(url)
