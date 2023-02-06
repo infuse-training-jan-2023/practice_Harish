@@ -6,7 +6,7 @@ import requests
 scenarios('../features/add_user.feature')
 
 get_item_url = "http://127.0.0.1:5000/register"
-data={
+data = {
     "username": "testuser",
     "email":"test@example.com",
     "phone": 123789}
@@ -18,7 +18,7 @@ def add_user():
 @then('I should get response contain a success message')
 def check_the_message_returned():
     body = pytest.api_response1.json()
-    assert   "user added successfully"==body['message'] 
+    assert   "user added successfully" == body['message'] 
 
 @then('the api status code should be 201')
 def check_status_code():

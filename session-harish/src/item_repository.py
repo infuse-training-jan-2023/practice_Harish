@@ -14,7 +14,8 @@ class ItemRepository:
         try:
             self.connect_db()
             cursor = self.connection.cursor()
-            rows = cursor.execute('select * from items')
+            cursor.execute('select * from items')
+            rows = cursor.fetchall()
             return rows
         except Exception as e:
             raise Exception('Error: ', e)
@@ -65,28 +66,4 @@ class ItemRepository:
             self.connection.commit()     
             return {'status': "item updated successfully"}
         except Exception as e:
-            raise Exception('Error: ', e)
-        
-    def add_user(self,username,email,phone):
-        try:
-            self.connect_db()
-            cursor = self.connection.cursor()
-            cursor.execute('insert into users(username,email, phone) values(?,?,?)',(username,email,phone,))
-            self.connection.commit()
-            return {
-                'username': username,
-                'email': email,
-                'phone': phone
-            }
-        except Exception as e:
-            raise Exception('Error: ', e)  
-    
-    def save_userdata(self):
-        try:
-            self.connect_db()
-            cursor = self.connection.cursor()
-            cursor.execute('select * from items')
-            rows=cursor.fetchall()  
-            return rows
-        except Exception as e:
-            raise Exception('Error: ', e)    
+            raise Exception('Error: ', e)     

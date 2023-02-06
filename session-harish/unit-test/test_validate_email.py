@@ -11,4 +11,4 @@ def test_validate_email_valid_case(mocker):
 def test_validate_email_invalid_case(mocker):
     mock = mocker.patch('passwordValidation.validate_password', return_value = invalid_message)
     res = validate_email("test@mail")
-    assert res == invalid_message    
+    assert res == invalid_message   

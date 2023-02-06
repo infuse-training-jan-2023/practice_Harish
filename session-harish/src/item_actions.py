@@ -1,6 +1,10 @@
 from item_repository import ItemRepository
 import csv
+import sqlite3
+
+
 class ItemActions:
+    
         def __init__(self) -> None:
             self.item_repo = ItemRepository()
 
@@ -19,6 +23,7 @@ class ItemActions:
             except Exception as e:
                 print(e)
             return {}
+        
         def add_item(self, item, reminder):
             try:
                 item = self.item_repo.add_item(item, reminder)
@@ -49,6 +54,7 @@ class ItemActions:
             except Exception as e:
                 print(e)
                 return {}
+            
         def update_item(self,id,update_item):
             try:
                 update = self.item_repo.update_item(id,update_item)
@@ -57,20 +63,12 @@ class ItemActions:
                 print(e)
             return {}
         
-        def add_user(self, username,email,phone):
-            try:
-                user = self.item_repo.add_user(username,email,phone)
-                return user
-            except Exception as e:
-                print(e)
-            return {}
-        
         def save_data(self):
             try:
-                rows=self.item_repo.save_userdata()
+                rows = self.item_repo.get_all_items()
                 with open("items.csv", "w", newline='') as csv_file:
                     csv_writer = csv.writer(csv_file)
-                    csv_writer.writerow([i[0] for i in cursor.description])
+                    csv_writer.writerow([i[0] for i in rows.description])
                 for row in rows:
                     csv_writer.writerow(row)
             except Exception as e:

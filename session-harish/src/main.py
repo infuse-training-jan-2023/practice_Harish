@@ -1,12 +1,14 @@
 from flask import Flask, Response,request,send_file
 from item_actions import ItemActions
+from user_repository import UserRepository
 import json
 
 app = Flask(__name__)
 item_actions = ItemActions()
+user_repo = UserRepository()
 
 
-@app.route('/item', methods=['GET'])
+@app.route('/items', methods=['GET'])
 def get_all_items():
     item=item_actions.get_all_items()
     return Response(json.dumps(item), mimetype='application/json',status=200)
@@ -49,7 +51,7 @@ def adduser():
     ursername = request_data['username']
     email = request_data['email']
     phone = request_data['phone']
-    added_user = item_actions.add_user(ursername, email, phone)
+    added_user =user_repo.add_user(ursername, email, phone)
     if added_user == {}:
         return Response("{'error': 'Erro addding the item'}", mimetype='application/json', status=500)
     return Response('{"message":"user added successfully"}', mimetype='application/json', status=201)
@@ -58,7 +60,6 @@ def adduser():
 def save_data():
     item_actions.save_data()
     return Response('{"status":"data saved successfully"}',mimetype='application/json', status=200)
-    #send_file('../out.csv')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000,host='0.0.0.0')

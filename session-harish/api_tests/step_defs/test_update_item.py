@@ -6,7 +6,7 @@ import requests
 scenarios('../features/update_item.feature')
 
 get_item_url = "http://127.0.0.1:5000/item/12"
-data1={
+data1 = {
     "item": "clear backlogs",
     "reminder":1}
 
