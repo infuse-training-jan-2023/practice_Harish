@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-    
+    agent {
+            label "jenkins-slave-harish"
+              }
     parameters{ 
      string(name: 'git_repo_url' , description:'git repository url' , defaultValue :'https://github.com/infuse-training-jan-2023/practice_Harish/')
      string(name: 'git_branch' , description:'working branch' , defaultValue :'jenkins/ruby')

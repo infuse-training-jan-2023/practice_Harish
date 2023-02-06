@@ -1,8 +1,9 @@
 import groovy.json.JsonSlurperClassic
 
 pipeline {
-    agent any
-
+agent {
+            label "jenkins-slave-harish"
+              }
     stages {
         stage("fetchdata") {
             steps {
