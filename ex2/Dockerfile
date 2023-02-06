@@ -1,7 +1,6 @@
 FROM ruby
 WORKDIR /usr/src/ruby
 ENV FILE=data.json
-ARG lib=gem install json
-RUN  ${library}
+RUN  gem install json
 COPY . .
-CMD ruby  exercise.rb  cricketdata.json ; cat cricketdata.json
+CMD ruby  exercise.rb  data.json 

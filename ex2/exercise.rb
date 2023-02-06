@@ -1,23 +1,18 @@
 require 'json'
 
-def modifyJsonFile(file)
-    puts file
+def modify_json_file(file)
     begin
         read_file =File.read(file)    
         if read_file.size==0
             return "file is empty"
         end
         data = JSON.parse(read_file)
-        puts data
         if data.size==0
             return "file is empty"
-        end
-        
+        end        
         data["Coach"]="Rahul Dravid"
         data["Captain"]="Rohit Sharma"
         data["Vice Captain"]="KL Rahul"
-
-        puts ARGV[0]
         File.write(ARGV[0],JSON.dump(data))
         return "file modify succefully"
     rescue
@@ -26,4 +21,4 @@ def modifyJsonFile(file)
         
 end
 
-puts modifyJsonFile(ENV['FILE'])
+puts modify_json_file(ENV['FILE'])

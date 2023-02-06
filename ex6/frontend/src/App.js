@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card';
 function Adduser(){
   return(
     <>
-    <h1>Simple s Todo List</h1>
+    <h1>Simple Todo List</h1>
     <Form action ="http://localhost:8000/addtask" method="post">
     <InputGroup className="mb-3">
         <Form.Control
@@ -25,22 +25,18 @@ function Adduser(){
       </InputGroup>
       </Form>
       <h4><Link to="/view">Display All Tasks</Link></h4>
-      
-
     </>
   )
 }
 
 const Viewuser = () => {
- 
 let [data, SetData] = useState([]);
 const fetchData = async () => {
   const response = await fetch(
       `http://localhost:8000/view`
-  );
-   let data_res = await response.json();
-   SetData(data_res)
-  console.log(data_res);  
+    );
+  let data_res = await response.json();
+  SetData(data_res)
 };  
 useEffect(() => {
       fetchData();
@@ -49,7 +45,7 @@ useEffect(() => {
   return(
     <>
     <h1><Link to="/">Simple Todo List</Link></h1>
-     <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem' }}>
     <div>{data.map((li)=>{return(<h2>{li.task}</h2>)})}</div>
     </Card>
     </>
