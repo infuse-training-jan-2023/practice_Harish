@@ -3,7 +3,7 @@ pipeline {
             label "jenkins-slave-harish"
             }
     stages {
-        stage('build') {
+        stage('compile') {
             steps {
                bat ''' 
                 java duplicateChar.java
