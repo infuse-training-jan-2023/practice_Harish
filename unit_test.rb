@@ -24,6 +24,18 @@ class TestExercise < Test::Unit::TestCase
 
         assert_equal("length should be greater than zero",exercise2_obj.start_and_length([9, 5, 1, 2, 3, 4, 0, -1],3,0))
     end
+    def test_elment_at_method_for_invalidInput
+        exercise2_obj = Exercise2.new()
+        assert_equal("array is empty",exercise2_obj.element_at([],9))
+        assert_equal("array index out of bound",exercise2_obj.element_at([9, 5, 1, 2, 3, 4, 0, -1],9))
+    end
+   
+    def test_elment_at_method_for_validInput
+        exercise2_obj = Exercise2.new()
+        assert_equal(-1,exercise2_obj.element_at([9, 5, 1, 2, 3, 4, 0, -1],7))
+        assert_equal(5,exercise2_obj.element_at([9, 5, 1, 2, 3, 4, 0, -1],-7))
+    end
+
 
 
 end
