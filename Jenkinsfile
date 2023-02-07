@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('run') {
+        stage('merge') {
             steps {
               bat """
               git switch jenkins/ruby
