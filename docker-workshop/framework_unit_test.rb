@@ -3,7 +3,8 @@ require_relative 'test_framework'
 require_relative 'webdriver'
 
 class FrameworkTest < Test::Unit::TestCase
-    @@url="file:///app/index.html"
+    #@@url="file:///app/index.html"
+    @@url='C:/Users/haris/OneDrive/Documents/practice_Harish/docker-workshop/index.html'
     def test_for_object_creation_of_Webdriver
         webdriver_obj =Webdriver.new()
         assert webdriver_obj.instance_of? Webdriver
@@ -30,6 +31,16 @@ class FrameworkTest < Test::Unit::TestCase
         assert_equal("Button Clicked",btn_inner_text)
     end
 
+    def test_click_element_invalid_case()
+        webdriver_obj =Webdriver.new()
+        driver=webdriver_obj.instance_variable_get(:@driver)
+        framework_obj = Framework.new(driver)
+        driver.get(@@url)
+        error=framework_obj.click_element({xpath: "//*[@id=\"test-bt\"]"})
+        btn_inner_text=driver.find_element({xpath: "//*[@id=\"test-btn\"]"}).text
+        assert_not_equal("Button Clicked",btn_inner_text)
+    end
+    
     def test_for_send_text()
         webdriver_obj =Webdriver.new()
         driver=webdriver_obj.instance_variable_get(:@driver)
