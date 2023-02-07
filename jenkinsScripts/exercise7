@@ -17,8 +17,9 @@ pipeline {
               cd ./practice_Harish
               git switch ${git_branch}
               ruby unit_test.rb
-              git switch jenkins/ruby
-              git merge jenkins/ruby-1
+              git checkout jenkins/ruby
+              git merge -X theirs jenkins/ruby-1
+              git push
               """
             }
         }
