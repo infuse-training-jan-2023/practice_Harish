@@ -14,7 +14,7 @@ pipeline {
               bat """
               git switch jenkins/ruby
               git merge origin/jenkins/ruby-1
-              git push origin/jenkins/ruby
+              git push -u origin jenkins/ruby
               """
             }
         }
