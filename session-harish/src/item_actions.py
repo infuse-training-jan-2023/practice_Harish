@@ -2,7 +2,6 @@ from item_repository import ItemRepository
 import csv
 import sqlite3
 
-
 class ItemActions:
     
         def __init__(self) -> None:
@@ -10,7 +9,7 @@ class ItemActions:
 
         def get_all_items(self):
             try:
-                items = self.item_repo.get_all_items()
+                cursor,items = self.item_repo.get_all_items()
                 res = []
                 for item in items:
                     res.append({
@@ -65,11 +64,10 @@ class ItemActions:
         
         def save_data(self):
             try:
-                rows = self.item_repo.get_all_items()
-                with open("items.csv", "w", newline='') as csv_file:
+                header,rows = self.item_repo.get_all_items()
+                with open("items.csv", 'w',newline='') as csv_file: 
                     csv_writer = csv.writer(csv_file)
-                    csv_writer.writerow([i[0] for i in rows.description])
-                for row in rows:
-                    csv_writer.writerow(row)
+                    csv_writer.writerow([i[0] for i in header.description]) 
+                    csv_writer.writerows(rows)
             except Exception as e:
                 return

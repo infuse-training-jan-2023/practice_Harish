@@ -16,7 +16,7 @@ class ItemRepository:
             cursor = self.connection.cursor()
             cursor.execute('select * from items')
             rows = cursor.fetchall()
-            return rows
+            return cursor,rows
         except Exception as e:
             raise Exception('Error: ', e)
     
@@ -56,7 +56,8 @@ class ItemRepository:
             self.connection.commit()
             return row
         except Exception as e:
-            raise Exception('Error: ', e)  
+            raise Exception('Error: ', e)
+        
     def update_item(self,id,update_item):
         try:
             self.connect_db()
