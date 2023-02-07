@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.util.*;
 class FindDuplicate{
     public static void findDuplicate(String str) {
@@ -20,7 +19,7 @@ class FindDuplicate{
         findDuplicate(testStrig);
     }
 }
-=======
+
 import java.util.*;
 class FindDuplicate{
     public static void findDuplicate(String str) {
@@ -42,4 +41,3 @@ class FindDuplicate{
         findDuplicate(testStrig);
     }
 }
->>>>>>> 7081b5b486ee9851e4623fec6c713767dffc4fcf
