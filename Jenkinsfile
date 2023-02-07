@@ -3,7 +3,7 @@ pipeline {
             label "jenkins-slave-harish"
             }
     stages {
-        stage('test') {
+        stage('run-test') {
             steps {
                bat ''' ruby unit_test.rb '''
             }
