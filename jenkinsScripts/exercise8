@@ -11,13 +11,10 @@ agent {
                     try{
                         def postmanGet  = new URL('https://jsonplaceholder.typicode.com/todos')
                         def getConnection =postmanGet.openConnection()
-                        getConnection.requestMethod ='GET'
-                        assert getConnection.responseCode ==200
-                        def resp =getConnection.getInputStream().getText()
-                        println (resp)
+                        def response =getConnection.getInputStream().getText()
                         def jsonSlurper = new JsonSlurperClassic()
-                        def data = jsonSlurper.parseText(resp)
-                        data.each{if(it.completed == false)println it}
+                        def todos = jsonSlurper.parseText(response)
+                        todos.each{if(it.completed == false)println it}
                         }
                     catch(err)
                         {
