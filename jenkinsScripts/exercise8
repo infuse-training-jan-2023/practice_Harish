@@ -1,0 +1,27 @@
+import groovy.json.JsonSlurperClassic
+
+pipeline {
+agent {
+            label "jenkins-slave-harish"
+              }
+    stages {
+        stage("fetchdata") {
+            steps {
+                script {
+                    try{
+                        def postmanGet  = new URL('https://jsonplaceholder.typicode.com/todos')
+                        def getConnection =postmanGet.openConnection()
+                        def response =getConnection.getInputStream().getText()
+                        def jsonSlurper = new JsonSlurperClassic()
+                        def todos = jsonSlurper.parseText(response)
+                        todos.each{todo -> if(todo.completed == false)println todo}
+                        }
+                    catch(err)
+                        {
+                            echo "Failed: ${err}"
+                        }
+                    }
+                }
+            }
+        }
+    }

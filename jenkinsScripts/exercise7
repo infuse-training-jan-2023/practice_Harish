@@ -1,0 +1,27 @@
+
+pipeline {
+    agent {
+            label "jenkins-slave-harish"
+              }
+    parameters{ 
+     string(name: 'git_repo_url' , description:'git repository url' , defaultValue :'https://github.com/infuse-training-jan-2023/practice_Harish/')
+     string(name: 'git_branch' , description:'working branch' , defaultValue :'jenkins/ruby-1')
+     string(name: 'git_directory' , description:'working directory' , defaultValue :'practice_Harish')
+    }
+   
+    stages {
+        stage('build') {
+            steps {
+              bat """
+              git clone ${git_repo_url}
+              cd ./practice_Harish
+              git switch ${git_branch}
+              ruby unit_test.rb
+              git checkout jenkins/ruby
+              git merge -X theirs jenkins/ruby-1
+              git push
+              """
+            }
+        }
+    }
+}
