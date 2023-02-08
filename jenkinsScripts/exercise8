@@ -14,7 +14,7 @@ agent {
                         def response =getConnection.getInputStream().getText()
                         def jsonSlurper = new JsonSlurperClassic()
                         def todos = jsonSlurper.parseText(response)
-                        todos.each{if(it.completed == false)println it}
+                        todos.each{todo -> if(todo.completed == false)println todo}
                         }
                     catch(err)
                         {
