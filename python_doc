@@ -1,0 +1,37 @@
+extend()
+method allows to append any iterable to the current list
+------------------------------------------------------------------------------------------------
+append()
+insert element at the end of the list
+------------------------------------------------------------------------------------------------
+Composition basically enables us for creating complex types objects by 
+combining other types of objects in the program. Composition represents 
+‘has a relationship’ type or we can call composition as ‘has a relationship’
+in the OOPs concept. It means that a composite class present in the program can
+contains the objects from the other class components and this type of relationship 
+model is called as has a relationship
+------------------------------------------------------------------------------------------------
+Trying to access element outside of the list
+
+if we try to access the element at index which is not exists then will give error saying 
+  index out of range
+------------------------------------------------------------------------------------------------
+A python package is a collection of modules. Modules that are related to each other are 
+mainly put in the same package. When a module from an external package is required in a program,
+that package can be imported and its modules can be put to use.
+
+A package is a directory of Python modules that contains an additional __init__.py file, which distinguishes a package from a directory that is supposed to contain multiple Python scripts. Packages can be nested to multiple depths if each corresponding directory contains its own __init__.py file
+
+fuction.py
+def sum(x,y):
+    return x+y
+
+def average(x,y):
+    return (x+y)/2
+
+def power(x,y):
+    return x**y
+
+__init__.py
+from .functions import average,sum
+
