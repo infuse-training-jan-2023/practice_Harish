@@ -4,16 +4,16 @@ Description: My API Gateway and Lambda function
 Parameters:
   apiGatewayName:
     Type: String
-    Default: my-api9
+    Default: logger-api
   apiGatewayStageName:
     Type: String
-    Default: call
+    Default: dev
   apiGatewayHTTPMethod:
     Type: String
     Default: ANY
   lambdaFunctionName:
     Type: String
-    Default: my-function9
+    Default: logger-fuction
 
 Resources:
   apiGateway:
