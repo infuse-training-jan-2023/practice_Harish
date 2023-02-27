@@ -19,7 +19,6 @@ Resources:
   apiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Description: Example API Gateway
       EndpointConfiguration:
         Types:
           - REGIONAL
@@ -50,10 +49,7 @@ Resources:
   lambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
-      Code:
-        S3Bucket: exercise-log
-        S3Key: index.zip
-      Description: Example Lambda function
+      Code: logger/
       FunctionName: !Ref lambdaFunctionName
       Handler: index.handler
       MemorySize: 128
