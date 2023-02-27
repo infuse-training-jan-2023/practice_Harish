@@ -76,18 +76,6 @@ Resources:
               Principal:
                 Service:
                   - lambda.amazonaws.com
-        Policies:
-          - PolicyName: lambda-logs
-            PolicyDocument:
-              Version: 2012-10-17
-              Statement:
-                - Action:
-                    - logs:CreateLogGroup
-                    - logs:CreateLogStream
-                    - logs:PutLogEvents
-                  Effect: Allow
-                  Resource:
-                    - !Sub arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${lambdaFunctionName}:*
           - PolicyName: lambda-s3-full-access
             PolicyDocument:
               Version: 2012-10-17
