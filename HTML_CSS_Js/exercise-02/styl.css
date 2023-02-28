@@ -1,0 +1,14 @@
+.clock{
+ font-size: 100px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.dark{
+    background:black;
+    color:white;
+  }
+
