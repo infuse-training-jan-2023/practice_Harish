@@ -1,22 +1,22 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: My API Gateway and Lambda function
+Description: API Gateway and Lambda function for storing timestamp
 
 Parameters:
   apiGatewayName:
     Type: String
-    Default: logger-api
+    Default: logger-api1
   apiGatewayStageName:
     Type: String
-    Default: dev
+    Default: logger
   apiGatewayHTTPMethod:
     Type: String
     Default: ANY
   lambdaFunctionName:
     Type: String
-    Default: logger-fuction
+    Default: logger-fuction1
 
 Resources:
-  apiGateway:
+  loggerApiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
       EndpointConfiguration:
@@ -24,7 +24,7 @@ Resources:
           - REGIONAL
       Name: !Ref apiGatewayName
 
-  apiGatewayRootMethod:
+  loggerApiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       AuthorizationType: NONE
@@ -34,37 +34,19 @@ Resources:
         Type: AWS_PROXY
         Uri: !Sub
           - arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
-          - lambdaArn: !GetAtt lambdaFunction.Arn
-      ResourceId: !GetAtt apiGateway.RootResourceId
-      RestApiId: !Ref apiGateway
+          - lambdaArn: !GetAtt loggerLambdaFunction.Arn
+      ResourceId: !GetAtt loggerApiGateway.RootResourceId
+      RestApiId: !Ref loggerApiGateway
 
   apiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
     DependsOn:
-      - apiGatewayRootMethod
+      - loggerApiGatewayRootMethod
     Properties:
-      RestApiId: !Ref apiGateway
+      RestApiId: !Ref loggerApiGateway
       StageName: !Ref apiGatewayStageName
-
-  lambdaFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Code: logger/
-      FunctionName: !Ref lambdaFunctionName
-      Handler: index.handler
-      MemorySize: 128
-      Role: !GetAtt lambdaIAMRole.Arn
-      Runtime: python3.8
-
-  lambdaApiGatewayInvoke:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName: !GetAtt lambdaFunction.Arn
-      Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/${apiGatewayStageName}/${apiGatewayHTTPMethod}/
-
-  lambdaIAMRole:
+      
+  loggerLambdaAccessRole:
       Type: AWS::IAM::Role
       Properties:
         AssumeRolePolicyDocument:
@@ -76,6 +58,7 @@ Resources:
               Principal:
                 Service:
                   - lambda.amazonaws.com
+        Policies:
           - PolicyName: lambda-s3-full-access
             PolicyDocument:
               Version: 2012-10-17
@@ -85,9 +68,29 @@ Resources:
                     - "s3:*"
                   Resource: "*"
 
+  loggerLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code: logger/
+      FunctionName: !Ref lambdaFunctionName
+      Handler: index.handler
+      MemorySize: 128
+      Role: !GetAtt loggerLambdaAccessRole.Arn
+      Runtime: python3.8
+
+  invokeLambdaThroughLoggerApiGateway:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt loggerLambdaFunction.Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${loggerApiGateway}/${apiGatewayStageName}/${apiGatewayHTTPMethod}/
+
+  
+
 Outputs:
-  apiGatewayInvokeURL:
-    Value: !Sub https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${apiGatewayStageName}
+  loggerApiGatewayInvokeURL:
+    Value: !Sub https://${loggerApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${apiGatewayStageName}
 
   lambdaArn:
-    Value: !GetAtt lambdaFunction.Arn
+    Value: !GetAtt loggerLambdaFunction.Arn
